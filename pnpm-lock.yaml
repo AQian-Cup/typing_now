@@ -4,6 +4,9 @@ dependencies:
   '@tauri-apps/api':
     specifier: ^1.3.0
     version: 1.3.0
+  '@unocss/reset':
+    specifier: ^0.52.4
+    version: 0.52.4
   '@vueuse/core':
     specifier: ^10.1.2
     version: 10.1.2(vue@3.2.45)
@@ -972,7 +975,6 @@ packages:
 
   /@unocss/reset@0.52.4:
     resolution: {integrity: sha512-tbKBifU5EPsLStKdXjUIwAN9thB1x/PbNWdYLW1GwciEOs/j9tdHnYgPlhalpmm5+N80uw3nHr6nY4RP/E98sA==}
-    dev: true
 
   /@unocss/scope@0.52.4:
     resolution: {integrity: sha512-+cQcbx/nJ2lUyQtxoTx8Hq16PMTsdUKVojoI5QnCj3BjW6YXhzF0Ojfe3DzxddkfLpVX9vaf/ooY9OWDK3tHEA==}
