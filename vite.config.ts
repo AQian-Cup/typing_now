@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from "node:url"
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import UnoCss from "unocss/vite"
@@ -5,7 +6,11 @@ import UnoCss from "unocss/vite"
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [vue(), UnoCss()],
-
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   // prevent vite from obscuring rust errors
   clearScreen: false,
