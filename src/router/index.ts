@@ -1,3 +1,5 @@
+// 考虑到路由过渡动效的实现
+// 此处没有使用路由懒加载
 import { createRouter, createWebHistory } from "vue-router"
 import home from "@/pages/home/index.vue"
 import test from "@/pages/test/index.vue"
