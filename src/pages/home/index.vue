@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-start h-screen p-10">
+  <div class="flex flex-col justify-center items-start p-10">
     <button
       v-for="button in homeButtons"
       class="py-6 text-4xl"
