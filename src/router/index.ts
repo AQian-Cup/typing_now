@@ -14,20 +14,39 @@ const routes = [
   {
     path: "/test",
     component: test,
+    meta: { transition: "slide-left" },
   },
   {
     path: "/practice",
     component: practice,
+    meta: { transition: "slide-down" },
   },
   {
     path: "/statistic",
     component: statistic,
+    meta: { transition: "slide-right" },
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.afterEach((to, form) => {
+  if (to.path === "/") {
+    switch (form.path) {
+      case "/test":
+        to.meta.transition = "slide-right"
+        break
+      case "/practice":
+        to.meta.transition = "slide-up"
+        break
+      case "/statistic":
+        to.meta.transition = "slide-left"
+        break
+    }
+  }
 })
 
 export default router
