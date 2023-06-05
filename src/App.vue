@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen bg-light-3 overflow-hidden">
-    <NBreadcrumb separator=">" class="m-4">
+    <NBreadcrumb separator=">" class="m-4 absolute">
       <NBreadcrumbItem @click="goHome"> 首页 </NBreadcrumbItem>
       <NBreadcrumbItem v-for="path in route.path.split('/').slice(1)">
         {{ path }}
