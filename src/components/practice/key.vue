@@ -2,7 +2,7 @@
   <div
     :class="{ 'border-yellow': isPressed }"
     :style="{ '--width': (keyWidthMap[key] || 1) * 4 + 'rem' }"
-    class="flex justify-center items-center bg-white box-border h-16 w-[--width] rounded-2 border-coolGray border-2 text-4"
+    class="flex justify-center items-center bg-white box-border h-16 w-[--width] rounded-2 border-coolGray border-2 text-4 transition-all"
   >
     <slot></slot>
   </div>
@@ -23,7 +23,7 @@ const keyMap: any = {
   RightShift: "Shift",
 }
 const keyWidthMap: any = {
-  Backspace: 2.5,
+  Backspace: 2.0,
   Tab: 1.5,
   CapsLock: 1.75,
   Enter: 2.25,
@@ -44,7 +44,7 @@ onKeyStroke(keyValue, () => {
   const timeHandler = setTimeout(() => {
     isPressed.value = false
     clearTimeout(timeHandler)
-  }, 500)
+  }, 300)
 })
 </script>
 <style scoped></style>
