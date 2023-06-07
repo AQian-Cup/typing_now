@@ -13,16 +13,25 @@
       transform-origin="center"
       :mask-closable="false"
     >
-      <NCard class="w-200">{{ time }}</NCard>
+      <NCard class="w-200">
+        <template #footer>
+          <div class="space-x-8 text-center">
+            <NButton @click="restart">重新开始</NButton>
+            <NButton @click="backHome">回到首页</NButton>
+          </div>
+        </template>
+      </NCard>
     </NModal>
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue"
+import { useRouter } from "vue-router"
 import Line from "@/components/test/line.vue"
-import { NModal, NCard } from "naive-ui"
+import { NModal, NCard, NButton } from "naive-ui"
 import { onKeyStroke, useTimestamp } from "@vueuse/core"
 
+const router = useRouter()
 const startTime = ref(0)
 const endTime = ref(0)
 const time = ref(0)
@@ -44,6 +53,16 @@ onKeyStroke(() => {
     startTime.value = timestamp.value
   }
 })
+const restart = () => {
+  startTime.value = 0
+  endTime.value = 0
+  time.value = 0
+  lineNumber.value = 0
+  isOver.value = false
+}
+const backHome = () => {
+  router.push("/")
+}
 </script>
 <style scoped>
 .line-slide-enter-active {
