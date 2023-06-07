@@ -13,7 +13,7 @@
       transform-origin="center"
       :mask-closable="false"
     >
-      <NCard class="w-200">测试内容</NCard>
+      <NCard class="w-200">{{ time }}</NCard>
     </NModal>
   </div>
 </template>
@@ -21,16 +21,29 @@
 import { ref } from "vue"
 import Line from "@/components/test/line.vue"
 import { NModal, NCard } from "naive-ui"
+import { onKeyStroke, useTimestamp } from "@vueuse/core"
 
+const startTime = ref(0)
+const endTime = ref(0)
+const time = ref(0)
+const timestamp = useTimestamp()
 const lineNumber = ref(0)
 const lineNumberIncrement = () => {
   if (lineNumber.value === text.value.length - 1) {
+    endTime.value = timestamp.value
+    time.value = +((endTime.value - startTime.value) / 1000).toFixed(2)
+    isOver.value = true
     return
   }
   lineNumber.value++
 }
 const text = ref(["Hello", "World"])
 const isOver = ref(false)
+onKeyStroke(() => {
+  if (!startTime.value) {
+    startTime.value = timestamp.value
+  }
+})
 </script>
 <style scoped>
 .line-slide-enter-active {
