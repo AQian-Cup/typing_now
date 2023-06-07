@@ -8,11 +8,19 @@
       ></Line>
     </Transition>
     <!-- <div class="border border-coolGray rounded w-4xl">测试</div> -->
+    <NModal
+      v-model:show="isOver"
+      transform-origin="center"
+      :mask-closable="false"
+    >
+      <NCard class="w-200">测试内容</NCard>
+    </NModal>
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue"
 import Line from "@/components/test/line.vue"
+import { NModal, NCard } from "naive-ui"
 
 const lineNumber = ref(0)
 const lineNumberIncrement = () => {
@@ -22,6 +30,7 @@ const lineNumberIncrement = () => {
   lineNumber.value++
 }
 const text = ref(["Hello", "World"])
+const isOver = ref(false)
 </script>
 <style scoped>
 .line-slide-enter-active {
