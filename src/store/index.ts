@@ -9,5 +9,8 @@ export const useStore = defineStore("main", () => {
   const countDecrease = () => {
     rightCount.value--
   }
-  return { rightCount, countIncrease, countDecrease }
+  const countReset = () => {
+    rightCount.value = 0
+  }
+  return { rightCount, countIncrease, countDecrease, countReset }
 })

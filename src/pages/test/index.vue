@@ -1,13 +1,16 @@
 <template>
-  <div class="flex flex-col justify-start items-center px-24 py-16">
-    <Transition name="line-slide">
+  <div class="flex flex-col justify-start items-center px-24 py-10 space-y-2">
+    <Transition name="line-slide" mode="out-in">
       <Line
         :text="text[lineNumber]"
         :key="lineNumber"
         @completed="lineNumberIncrement"
-      ></Line>
+      >
+      </Line>
     </Transition>
-    <!-- <div class="border border-coolGray rounded w-4xl">测试</div> -->
+    <Transition name="nextLine-fade" mode="out-in">
+      <NextLine :text="text[lineNumber + 1]" :key="lineNumber + 1"></NextLine>
+    </Transition>
     <NModal
       v-model:show="isOver"
       transform-origin="center"
@@ -36,10 +39,13 @@
 import { computed, ref } from "vue"
 import { useRouter } from "vue-router"
 import Line from "@/components/test/line.vue"
+import NextLine from "@/components/test/nextLine.vue"
 import { NModal, NCard, NButton } from "naive-ui"
 import { onKeyStroke, useTimestamp } from "@vueuse/core"
+import { useStore } from "@/store"
 
 const router = useRouter()
+const store = useStore()
 const startTime = ref(0)
 const endTime = ref(0)
 const time = ref(0)
@@ -54,7 +60,7 @@ const lineNumberIncrement = () => {
   }
   lineNumber.value++
 }
-const text = ref(["Hello", "World"])
+const text = ref(["Hello", "World", "Now", "Start"])
 const count = computed(() => {
   return text.value.reduce(
     (previousValue, currentValue) => previousValue + currentValue.length,
@@ -76,6 +82,7 @@ const restart = () => {
   time.value = 0
   lineNumber.value = 0
   isOver.value = false
+  store.countReset()
 }
 const backHome = () => {
   router.push("/")
@@ -83,15 +90,21 @@ const backHome = () => {
 </script>
 <style scoped>
 .line-slide-enter-active {
-  animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .line-slide-leave-active {
-  animation: slide-out-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-out-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
+.nextLine-fade-enter-active {
+  animation: fade-in 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.nextLine-fade-leave-active {
+  animation: fade-in 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both reverse;
+}
 @keyframes slide-in-bottom {
   0% {
-    transform: translateY(100%);
+    transform: translateY(25%);
     opacity: 0;
   }
   100% {
@@ -106,8 +119,17 @@ const backHome = () => {
     opacity: 1;
   }
   100% {
-    transform: translateY(-100%);
+    transform: translateY(-25%);
     opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>
