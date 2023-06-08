@@ -23,6 +23,7 @@
             <div>用时{{ time }}秒</div>
             <div>输入{{ count }}字</div>
             <div>速度为{{ speed }}字每秒</div>
+            <div>正确率为{{ correctRate }}</div>
           </div>
         </template>
         <template #footer>
@@ -60,7 +61,7 @@ const lineNumberIncrement = () => {
   }
   lineNumber.value++
 }
-const text = ref(["Hello", "World", "Now", "Start"])
+const text = ref(["你好", "世界", "从现在", "开始"])
 const count = computed(() => {
   return text.value.reduce(
     (previousValue, currentValue) => previousValue + currentValue.length,
@@ -69,6 +70,9 @@ const count = computed(() => {
 })
 const speed = computed(() => {
   return (count.value / time.value).toFixed(2)
+})
+const correctRate = computed(() => {
+  return ((store.rightCount / count.value) * 100).toFixed(2) + "%"
 })
 const isOver = ref(false)
 onKeyStroke(() => {
