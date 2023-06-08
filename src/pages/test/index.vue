@@ -14,6 +14,14 @@
       :mask-closable="false"
     >
       <NCard class="w-200">
+        <template #default>
+          <div class="flex flex-col space-y-4 items-center text-4">
+            <div>恭喜你完成测试</div>
+            <div>用时{{ time }}秒</div>
+            <div>输入{{ count }}字</div>
+            <div>速度为{{ speed }}字每秒</div>
+          </div>
+        </template>
         <template #footer>
           <div class="space-x-8 text-center">
             <NButton @click="restart">重新开始</NButton>
@@ -25,7 +33,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { useRouter } from "vue-router"
 import Line from "@/components/test/line.vue"
 import { NModal, NCard, NButton } from "naive-ui"
@@ -47,6 +55,15 @@ const lineNumberIncrement = () => {
   lineNumber.value++
 }
 const text = ref(["Hello", "World"])
+const count = computed(() => {
+  return text.value.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.length,
+    0,
+  )
+})
+const speed = computed(() => {
+  return (count.value / time.value).toFixed(2)
+})
 const isOver = ref(false)
 onKeyStroke(() => {
   if (!startTime.value) {
