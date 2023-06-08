@@ -38,8 +38,10 @@ import { useRouter } from "vue-router"
 import Line from "@/components/test/line.vue"
 import { NModal, NCard, NButton } from "naive-ui"
 import { onKeyStroke, useTimestamp } from "@vueuse/core"
+import { useStore } from "@/store"
 
 const router = useRouter()
+const store = useStore()
 const startTime = ref(0)
 const endTime = ref(0)
 const time = ref(0)
@@ -76,6 +78,7 @@ const restart = () => {
   time.value = 0
   lineNumber.value = 0
   isOver.value = false
+  store.countReset()
 }
 const backHome = () => {
   router.push("/")
