@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-start items-center px-24 py-10">
+  <div class="flex flex-col justify-start items-center px-24 py-16">
     <Transition name="line-slide">
       <Line
         :text="text[lineNumber]"
