@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-start items-center px-20 py-10 space-y-16">
+  <div class="flex flex-col justify-start items-center px-20 py-16 space-y-16">
     <Lead></Lead>
     <Keyboard></Keyboard>
   </div>
