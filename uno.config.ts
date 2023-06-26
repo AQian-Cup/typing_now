@@ -1,6 +1,14 @@
-import { defineConfig } from "unocss"
+import { defineConfig, presetIcons } from "unocss"
 import presetUno from "@unocss/preset-uno"
 
 export default defineConfig({
-  presets: [presetUno()],
+  presets: [
+    presetUno(),
+    presetIcons({
+      collections: {
+        majesticons: () =>
+          import("@iconify-json/majesticons/icons.json").then((i) => i.default),
+      },
+    }),
+  ],
 })
