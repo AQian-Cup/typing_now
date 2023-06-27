@@ -15,9 +15,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, watch } from "vue"
+import { onMounted, ref, watch } from "vue"
 import { NInput } from "naive-ui"
-import { onStartTyping } from "@vueuse/core"
 import { useStore } from "@/store"
 
 const props = defineProps<{
@@ -49,7 +48,7 @@ watch(input, (value, oldValue) => {
     emit("completed")
   }
 })
-onStartTyping(() => {
+onMounted(() => {
   if (inputRef.value !== document.activeElement) {
     inputRef.value?.focus()
   }
